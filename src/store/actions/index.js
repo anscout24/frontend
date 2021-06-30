@@ -1,5 +1,8 @@
 // export actions
 export {
-    fetch_action_flex,
     fetchDatafromApi,
 } from './apiCall';
+
+export {
+    ActionTrigger,
+} from './actionTrigger';

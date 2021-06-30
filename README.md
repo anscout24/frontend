@@ -1,6 +1,18 @@
 # Getting Started with Create React App
+### AGENDA
+1. How to build and run 
+2. Description how app works
+3. Assumptions and design decisions
+4. Known constraints and/or limits
+5. Possible improvements
+6. Considaration of work that would be needed to productionize your code
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+### Assumptions and design decisions
+
+
+
 
 ## Available Scripts
 

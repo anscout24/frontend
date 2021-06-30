@@ -1,5 +1,6 @@
 import React from 'react';
 import ConnectionCheck from "../../components/backendCheck/view";
+import MainMuiTable from "../../components/tbl-mui/view";
 import LayoutWrapper from '../../shared/layoutWrapper/layoutWrapper';
 
 const MainPage = () => {
@@ -10,6 +11,11 @@ const MainPage = () => {
                 <p/>
                 <h1> Website for Scout24 Challenge </h1>
                 <ConnectionCheck/>
+            </LayoutWrapper>
+
+            <LayoutWrapper ContainerTyp="Body">
+                <p/>
+                <MainMuiTable/>
             </LayoutWrapper>
 
         </>

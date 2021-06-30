@@ -6,21 +6,23 @@ import SettingsInputAntennaIcon from '@material-ui/icons/SettingsInputAntenna';
 
 class ConnectionCheck extends React.Component{
 
-    intervalID_JOBCOUNT;
+    intervalID;
 
     getData (){
         this.props.onFetchFrom_API(routes.TEST_API_ROUTE,'GET')
     }
 
+
     componentDidMount() {
         this.getData();
-        clearInterval(this.intervalID_JOBCOUNT)
+        clearInterval(this.intervalID)
         const timeout =  this.props.INTERVAL*1000;
-        this.intervalID_JOBCOUNT = setInterval(this.getData.bind(this),timeout)
+        this.intervalID = setInterval(this.getData.bind(this),timeout)
+
     }
 
     componentWillUnmount() {
-        clearInterval(this.intervalID_JOBCOUNT)
+        clearInterval(this.intervalID)
     }
 
     render() {
@@ -32,7 +34,7 @@ class ConnectionCheck extends React.Component{
 const mapStateToProps = state => {
     return {
         BACKEND_STATUS: state.main.backendStatus,
-        INTERVAL: state.main.interval_jobcount,
+        INTERVAL: state.main.interval,
     };
 }
 

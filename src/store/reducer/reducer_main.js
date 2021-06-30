@@ -1,13 +1,14 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    interval_jobcount: 15,
+    interval: 15,
     backendStatus: false,
+    listings: null,
     error: null
 
 };
 
-const updateObject = (oldObject, updatedProperties) => {
+export const updateObject = (oldObject, updatedProperties) => {
     return {
         ...oldObject,
         ...updatedProperties
@@ -34,6 +35,9 @@ const reducer_main = (state = initialState, action) => {
         case actionTypes.TEST_BACKEND_CONNECTION_SUCCESS: return setStateParams(state,action);
         case actionTypes.TEST_BACKEND_CONNECTION_FAILURE: return setStateParams(state,action);
 
+        case actionTypes.FETCH_DATA_START: return setStateParams(state,action);
+        case actionTypes.FETCH_DATA_SUCCESS: return setStateParams(state,action);
+        case actionTypes.FETCH_DATA_FAILURE: return setStateParams(state,action);
 
         default:
             return state;

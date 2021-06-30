@@ -1,12 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import * as routes from '../routes/routes';
-
-export const fetch_action_flex = (actionType, param = null, ...arg) => {
-    return {
-        type: actionTypes[actionType], param, ...arg
-    }
-};
+import {ActionTrigger} from "./actionTrigger";
 
 /***
  *
@@ -37,7 +32,7 @@ export const fetchDatafromApi = (url, method, ...args) => {
          * imported as routes
          */
 
-            //define unique route url+method to protect spelling errors
+        //define unique route url+method to protect spelling errors
         const providedRouteUrlMethod = url + '_' + method;
 
         switch (providedRouteUrlMethod) {
@@ -53,19 +48,40 @@ export const fetchDatafromApi = (url, method, ...args) => {
 
                 cfg.params = args[0]
 
-                dispatch(fetch_action_flex(actionTypes.TEST_BACKEND_CONNECTION_START));
+                dispatch(ActionTrigger(actionTypes.TEST_BACKEND_CONNECTION_START));
 
                 axios.get(url, cfg)
                     .then(() => {
-                        dispatch(fetch_action_flex(
+                        dispatch(ActionTrigger(
                             actionTypes.TEST_BACKEND_CONNECTION_SUCCESS,
                             {backendStatus: true},
                         ));
                     })
                     .catch(err => {
-                        dispatch(fetch_action_flex(
+                        dispatch(ActionTrigger(
                             actionTypes.TEST_BACKEND_CONNECTION_FAILURE,
                             {backendStatus: false, error: err},
+                        ));
+                    });
+                break;
+
+            case routes.FETCH_DATA_VERIFICATION:
+
+                cfg.params = args[0]
+
+                dispatch(ActionTrigger(actionTypes.TEST_BACKEND_CONNECTION_START));
+
+                axios.get(url, cfg)
+                    .then((response) => {
+                        dispatch(ActionTrigger(
+                            actionTypes.TEST_BACKEND_CONNECTION_SUCCESS,
+                            {listings: response.data.data},
+                        ));
+                    })
+                    .catch(err => {
+                        dispatch(ActionTrigger(
+                            actionTypes.TEST_BACKEND_CONNECTION_FAILURE,
+                            {error: err},
                         ));
                     });
                 break;

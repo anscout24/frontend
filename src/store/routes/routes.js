@@ -10,5 +10,9 @@ export const TEST_API_ROUTE = API_SERVER
 export const TEST_API_ROUTE_VERIFICATION = API_SERVER+'_GET';
 
 // SWAGGER
-export const SWAGGER_ROUTE = API_SERVER+'/doc'
+export const SWAGGER_ROUTE = API_SERVER+'/doc';
 
+// FETCH DATA
+const FETCH_ROUTE = API_SERVER+'/mvp';
+export const FETCH_DATA_ROUTE = FETCH_ROUTE;
+export const FETCH_DATA_VERIFICATION = FETCH_ROUTE+'_GET';
