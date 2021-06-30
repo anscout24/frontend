@@ -12,6 +12,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 
+let id=0
+const getID = () => `i_${id++}`;
+
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -66,7 +69,7 @@ const BasicTable = (props) => {
                     <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={getID()}>
                                     {columns.map((column) => {
                                         const value = row[column.field];
                                         return (
