@@ -39,6 +39,10 @@ const reducer_main = (state = initialState, action) => {
         case actionTypes.FETCH_DATA_SUCCESS: return setStateParams(state,action);
         case actionTypes.FETCH_DATA_FAILURE: return setStateParams(state,action);
 
+        case actionTypes.POST_DATA_START: return setStateParams(state,action);
+        case actionTypes.POST_DATA_SUCCESS: return setStateParams(state,action);
+        case actionTypes.POST_DATA_FAILURE: return setStateParams(state,action);
+
         default:
             return state;
     }

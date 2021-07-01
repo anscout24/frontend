@@ -12,7 +12,7 @@ class MainMuiTable extends Component{
     }
 
     componentDidMount() {
-        this.props.onFetchFrom_API(routes.FETCH_DATA_ROUTE,'GET')
+        this.props.onFetchFrom_API(routes.FETCH_DATA_ROUTE)
     }
 
 

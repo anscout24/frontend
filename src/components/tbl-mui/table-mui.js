@@ -10,7 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import MuiAddForm from "./tbl-mui-addform";
 
 let id=0
 const getID = () => `i_${id++}`;
@@ -24,6 +24,10 @@ const useStyles = makeStyles({
     },
     sumRow: {
         borderBottomColor: "#9bc0ff",
+    },
+    img: {
+      height: 100,
+      width: 100
     }
 });
 
@@ -47,7 +51,8 @@ const BasicTable = (props) => {
 
     return (
         <Paper className={classes.root}>
-            {/*<MuiTableSetting/>*/}
+            <MuiAddForm/>
+
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
 
@@ -72,11 +77,21 @@ const BasicTable = (props) => {
                                 <TableRow hover role="checkbox" tabIndex={-1} key={getID()}>
                                     {columns.map((column) => {
                                         const value = row[column.field];
-                                        return (
-                                            <TableCell key={column.label} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                        );
+
+                                        switch (column.field){
+                                            case "imageURL":
+                                                return (
+                                                    <TableCell key={column.label} align={column.align}  >
+                                                        {value?<img src={value} alt="new" className={classes.img} />:null}
+                                                    </TableCell>
+                                                    )
+                                            default:
+                                                return(
+                                                    <TableCell key={column.label} align={column.align}>
+                                                        {column.format ? column.format(value) : value}
+                                                    </TableCell>
+                                                )
+                                        }
                                     })}
                                 </TableRow>
                             );
@@ -104,8 +119,7 @@ const BasicTable = (props) => {
 
 const mapStateToProps = state => {
     return {
-        BACKEND_STATUS: state.main.backendStatus,
-
+        LISTINGS_DATA: state.main.listings,
     };
 }
 
