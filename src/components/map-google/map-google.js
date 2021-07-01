@@ -22,7 +22,7 @@ const SimpleMap = (props) => {
 
         // eslint-disable-next-line array-callback-return
         props.LISTINGS_DATA.map( item => { mapPoint.push(
-            <MapMarker key={getID()} lat={item.latitude} lng={item.longitude} label={item.text}/>) }
+            <MapMarker key={getID()} lat={item.latitude} lng={item.longitude} item={item}/>) }
         )
         return mapPoint
     }

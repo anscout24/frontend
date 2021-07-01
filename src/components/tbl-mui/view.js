@@ -22,8 +22,7 @@ class MainMuiTable extends Component{
         if (this.props.LISTINGS_DATA !== prevProps.LISTINGS_DATA) {
             let _dc = {}
             _dc.columns = MUI_TABLE_COLUMN_MAIN
-            _dc.data = this.props.LISTINGS_DATA;
-            // _dc.data = rows;
+            _dc.data = this.props.LISTINGS_DATA
 
             this.setState({dc: _dc})
         }

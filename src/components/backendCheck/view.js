@@ -9,7 +9,7 @@ class ConnectionCheck extends React.Component{
     intervalID;
 
     getData (){
-        this.props.onFetchFrom_API(routes.TEST_API_ROUTE,'GET')
+        this.props.onFetchFrom_API(routes.TEST_API_ROUTE)
     }
 
 

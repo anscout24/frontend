@@ -22,9 +22,9 @@ export default function MapMarker(props) {
         setAnchorEl(event.currentTarget);
     };
 
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
+    const PopText = ""+props.item.street+", "+props.item.houseNumber+", "+props.item.postcode+", "+props.item.city
+
+    const handlePopoverClose = () => {setAnchorEl(null)};
 
     const open = Boolean(anchorEl);
 
@@ -59,7 +59,7 @@ export default function MapMarker(props) {
                 onClose={handlePopoverClose}
                 disableRestoreFocus
             >
-                <Typography>{props.label}</Typography>
+                <Typography>{PopText}</Typography>
             </Popover>
         </div>
     );
