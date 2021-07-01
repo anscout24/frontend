@@ -4,7 +4,7 @@ import MapMarker from "./map-marker";
 import {connect} from "react-redux";
 import {mapDispatch} from "../../store/dispatches/mapDispatch";
 
-const GOOGLE_KEY =  process.env.REACT_APP_GOOGLE_API_KEY
+const GOOGLE_KEY =  window._env_.REACT_APP_GOOGLE_API_KEY
 
 let id=0
 const getID = () => `k_${id++}`;
