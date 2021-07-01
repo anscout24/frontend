@@ -70,7 +70,6 @@ const MuiAddForm = (props) => {
         setOpen(false)
         let payload = {...property, realEstateType: propertyType }
         props.onPostTo_API(routes.POST_ROUTE,payload)
-        props.onFetchFrom_API(routes.FETCH_DATA_ROUTE)
 
     };
 
@@ -146,7 +145,7 @@ const MuiAddForm = (props) => {
                 <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                       Fill out the fields below to add new property. Some fields are mandatory.
+                       Fill out the fields below to add new property.
                     </DialogContentText>
                     {createInputFields()}
                 </DialogContent>

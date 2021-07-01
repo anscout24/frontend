@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import MuiAddForm from "./tbl-mui-addform";
+import MuiFilter from "./tbl-mui-filter";
+
 
 let id=0
 const getID = () => `i_${id++}`;
@@ -28,6 +30,11 @@ const useStyles = makeStyles({
     img: {
       height: 100,
       width: 100
+    },
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        // justifyContent: "space-between"
     }
 });
 
@@ -51,7 +58,10 @@ const BasicTable = (props) => {
 
     return (
         <Paper className={classes.root}>
-            <MuiAddForm/>
+            <div className={classes.header}>
+                <MuiAddForm/>
+                <MuiFilter/>
+            </div>
 
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">

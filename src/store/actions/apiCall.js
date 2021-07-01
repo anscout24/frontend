@@ -69,18 +69,39 @@ export const fetchDatafromApi = (url, method, ...args) => {
 
                 cfg.params = args[0]
 
-                dispatch(ActionTrigger(actionTypes.TEST_BACKEND_CONNECTION_START));
+                dispatch(ActionTrigger(actionTypes.FETCH_DATA_START));
 
                 axios.get(url, cfg)
                     .then((response) => {
                         dispatch(ActionTrigger(
-                            actionTypes.TEST_BACKEND_CONNECTION_SUCCESS,
+                            actionTypes.FETCH_DATA_SUCCESS,
                             {listings: response.data.data},
                         ));
                     })
                     .catch(err => {
                         dispatch(ActionTrigger(
-                            actionTypes.TEST_BACKEND_CONNECTION_FAILURE,
+                            actionTypes.FETCH_DATA_FAILURE,
+                            {error: err},
+                        ));
+                    });
+                break;
+
+            case routes.FETCH_FILTERED_DATA_VERIFICATION:
+
+                cfg.params = {...args[0]}
+
+                dispatch(ActionTrigger(actionTypes.FETCH_DATA_START));
+
+                axios.get(url, cfg)
+                    .then((response) => {
+                        dispatch(ActionTrigger(
+                            actionTypes.FETCH_DATA_SUCCESS,
+                            {listings: response.data.data},
+                        ));
+                    })
+                    .catch(err => {
+                        dispatch(ActionTrigger(
+                            actionTypes.FETCH_DATA_FAILURE,
                             {error: err},
                         ));
                     });
