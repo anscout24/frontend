@@ -17,7 +17,7 @@ import MuiFilter from "./tbl-mui-filter";
 let id=0
 const getID = () => `i_${id++}`;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
     root: {
         width: '100%',
     },
@@ -33,15 +33,18 @@ const useStyles = makeStyles({
     },
     header: {
         display: "flex",
+        [theme.breakpoints.down('sm')]:{
+            flexDirection: "column",
+        },
         flexDirection: "row",
         // justifyContent: "space-between"
     }
-});
+}));
 
 const BasicTable = (props) => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
 
     const columns = props.data.columns;
     const rows = props.data.data;

@@ -30,11 +30,28 @@ const useStyles = makeStyles((theme) =>
         inputfields: {
             width: "100%"
         },
+        sliderDiv: {
+            [theme.breakpoints.down('sm')]:{
+                width: "60%" ,
+                paddingTop:25
+            },
+            width: "30%" ,
+            marginLeft: 50,
+            paddingTop:25
+        },
         slider: {
             width: "100%",
             paddingTop: 20,
-        }
+        },
+        autocomplete: {
+            [theme.breakpoints.down('sm')]:{
+                width: "60%" ,
 
+            },
+            width: "20%" ,
+            marginLeft: 50,
+            paddingTop:28
+        }
     }),
 );
 
@@ -53,13 +70,16 @@ const MuiFilter = (props) => {
         salesPriceMax: 999999,
     });
 
-    const minRentalPrice = Math.min.apply(Math, props.LISTINGS_DATA.map(function(e) {return e.rentalPrice; }))
-    const maxRentalPrice = Math.max.apply(Math, props.LISTINGS_DATA.map(function(e) {return e.rentalPrice; }))
-    const minSalesPrice = Math.min.apply(Math, props.LISTINGS_DATA.map(function(e) {return e.salesPrice; }))
-    const maxSalesPrice = Math.max.apply(Math, props.LISTINGS_DATA.map(function(e) {return e.salesPrice; }))
+    const getMinMax = (key) => {
+        const min = Math.min.apply(Math, props.LISTINGS_DATA.map(function(e) {return e[key]; }))
+        const max = Math.max.apply(Math, props.LISTINGS_DATA.map(function(e) {return e[key]; }))
+        return [min, max]
+    }
 
-    const [valueSliderRentalPrice, setValueSliderRentalPrice] = React.useState([minRentalPrice, maxRentalPrice]);
-    const [valueSliderSalesPrice, setValueSliderSalesPrice] = React.useState([minSalesPrice, maxSalesPrice]);
+    const [valueSliderRentalPrice, setValueSliderRentalPrice] = React.useState(()=> getMinMax('rentalPrice'));
+    const [initSliderRentalPrice] = React.useState(()=> getMinMax('rentalPrice'));
+    const [valueSliderSalesPrice, setValueSliderSalesPrice] = React.useState(()=> getMinMax('salesPrice'));
+    const [initvalueSliderSalesPrice] = React.useState(()=> getMinMax('salesPrice'));
 
     const conditions = [
         parseInt(value.rentalPriceMax) > parseInt(value.rentalPriceMin),
@@ -86,7 +106,7 @@ const MuiFilter = (props) => {
 
     return (
         <>
-            <div style={{ width: 200 , marginLeft: 50, paddingTop:28}}>
+            <div className={classes.autocomplete} >
                 <Autocomplete
                     {...defaultProps}
                     key="realEstateType"
@@ -101,7 +121,7 @@ const MuiFilter = (props) => {
             </div>
             {/*{createTextfield()}*/}
 
-            <div style={{ width: 400 , marginLeft: 50, paddingTop:25}}>
+            <div className={classes.sliderDiv }>
                 <Typography id="range-slider" gutterBottom>
                     Range for Rent Price EUR min: {valueSliderRentalPrice[0]} to max: {valueSliderRentalPrice[1]}
                 </Typography>
@@ -111,8 +131,8 @@ const MuiFilter = (props) => {
                     value={valueSliderRentalPrice}
                     getAriaValueText={valuetext}
                     onChange={handleChange}
-                    min={minRentalPrice}
-                    max={maxRentalPrice}
+                    min={initSliderRentalPrice[0]}
+                    max={initSliderRentalPrice[1]}
                     step={1}
                     onChangeCommitted = {(event,number) => {
                         setValue(prevState =>({
@@ -126,7 +146,7 @@ const MuiFilter = (props) => {
 
             </div>
 
-            <div style={{ width: 400 , marginLeft: 50, paddingTop:25}}>
+            <div className={classes.sliderDiv}>
                 <Typography id="range-slider" gutterBottom>
                     Range for Sales Price EUR min: {valueSliderSalesPrice[0]} to max: {valueSliderSalesPrice[1]}
                 </Typography>
@@ -136,8 +156,8 @@ const MuiFilter = (props) => {
                     value={valueSliderSalesPrice}
                     getAriaValueText={valuetext}
                     onChange={handleChangeSalesSlider}
-                    min={minSalesPrice}
-                    max={maxSalesPrice}
+                    min={initvalueSliderSalesPrice[0]}
+                    max={initvalueSliderSalesPrice[1]}
                     step={1}
                     onChangeCommitted = {(event,number) => {
                         setValue(prevState =>({
